@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>이관오 | AI Engineer Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0e1a;
+      --surface: #111827;
+      --surface2: #1a2236;
+      --accent: #00d4aa;
+      --accent2: #4f8ef7;
+      --accent3: #ff6b6b;
+      --text: #e8edf5;
+      --muted: #7a8aa0;
+      --border: #1e2d40;
+      --mono: 'Space Mono', monospace;
+      --sans: 'Sora', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── BACKGROUND GRID ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,212,170,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,170,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 3rem;
+      background: rgba(10,14,26,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+    }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── SECTIONS ── */
+    section {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 6rem 2rem;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 8rem;
+    }
+
+    .hero-label {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.2s;
+    }
+
+    .hero-name {
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.4s;
+    }
+
+    .hero-name span { color: var(--accent); }
+
+    .hero-name-kr {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 300;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.55s;
+    }
+
+    .hero-tagline {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.7s;
+    }
+
+    .hero-tagline strong { color: var(--accent2); font-weight: 600; }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.85s;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.75rem;
+      border-radius: 4px;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+      font-weight: 700;
+    }
+
+    .btn-primary:hover {
+      background: #00b894;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,212,170,0.3);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .hero-status {
+      margin-top: 4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 1s;
+    }
+
+    .status-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    /* ── SECTION HEADER ── */
+    .sec-header {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .sec-num {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+    }
+
+    .sec-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .sec-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .about-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+
+    .about-item-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .about-item-value {
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .about-highlight {
+      grid-column: 1 / -1;
+      border-left: 3px solid var(--accent);
+      padding: 1.5rem 2rem;
+    }
+
+    /* ── EDUCATION ── */
+    .edu-card {
+      border-left: 3px solid var(--accent2);
+    }
+
+    .edu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .edu-school { font-size: 1.2rem; font-weight: 700; }
+    .edu-dept { color: var(--accent2); margin-top: 0.2rem; font-size: 0.95rem; }
+    .edu-period {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      background: var(--surface2);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .course-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 4px;
+      background: var(--surface2);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    .tag-accent { background: rgba(0,212,170,0.1); color: var(--accent); border-color: rgba(0,212,170,0.3); }
+    .tag-blue { background: rgba(79,142,247,0.1); color: var(--accent2); border-color: rgba(79,142,247,0.3); }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-group-title {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+
+    .skill-item {
+      margin-bottom: 1rem;
+    }
+
+    .skill-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.4rem;
+    }
+
+    .skill-name { font-size: 0.9rem; }
+
+    .skill-level {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--muted);
+    }
+
+    .skill-bar {
+      height: 3px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .skill-fill {
+      height: 100%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transition: width 1s ease;
+    }
+
+    /* ── PROJECTS ── */
+    .project-card {
+      border-left: 3px solid var(--accent3);
+    }
+
+    .project-status {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 20px;
+      background: rgba(255,107,107,0.15);
+      color: var(--accent3);
+      border: 1px solid rgba(255,107,107,0.3);
+      margin-bottom: 1rem;
+    }
+
+    .project-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-summary {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .meta-item-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .meta-item-value { font-size: 0.88rem; }
+
+    /* ── EXPERIENCE ── */
+    .exp-item {
+      display: flex;
+      gap: 1.5rem;
+      padding: 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      transition: border-color 0.2s;
+    }
+
+    .exp-item:hover { border-color: var(--accent2); }
+
+    .exp-icon {
+      font-size: 1.5rem;
+      width: 3rem;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .exp-title { font-weight: 600; margin-bottom: 0.2rem; }
+    .exp-sub { font-size: 0.85rem; color: var(--muted); }
+
+    /* ── CV ── */
+    .cv-block {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2.5rem;
+    }
+
+    .cv-icon { font-size: 3rem; }
+
+    .cv-text h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+    .cv-text p { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.2rem; }
+
+    .cv-note {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--accent3);
+      margin-top: 0.8rem;
+    }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.2rem 1.5rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.2s;
+    }
+
+    .contact-item:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .contact-icon { font-size: 1.3rem; }
+    .contact-label { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); }
+    .contact-value { font-size: 0.88rem; }
+
+    /* ── CAREER GOAL ── */
+    .goal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .goal-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .goal-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,212,170,0.1);
+    }
+
+    .goal-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+    .goal-title { font-weight: 600; font-size: 0.95rem; }
+    .goal-desc { font-size: 0.8rem; color: var(--muted); margin-top: 0.4rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 4rem 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; }
+      .project-meta { grid-template-columns: 1fr; }
+      .edu-header { flex-direction: column; gap: 0.5rem; }
+      .cv-block { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">LGO.DEV</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-label">// AI Engineering Portfolio</div>
+  <div class="hero-name">Lee <span>Gwano</span></div>
+  <div class="hero-name-kr">이 관 오</div>
+  <p class="hero-tagline">
+    Undergraduate student specializing in
+    <strong>Vision-Based Robotic Grasping</strong> and Intelligent Manipulation systems.
+    Building the future of autonomous AI.
+  </p>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-primary">View Projects →</a>
+    <a href="./resume.pdf" class="btn btn-outline" download>Download CV</a>
+  </div>
+  <div class="hero-status">
+    <div class="status-dot"></div>
+    Currently studying AI Engineering · Chosun University · 2nd Year
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-header">
+    <span class="sec-num">01 /</span>
+    <h2 class="sec-title">About Me</h2>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="about-grid">
+    <div class="about-item about-highlight">
+      <div class="about-item-label">Intro</div>
+      <div class="about-item-value">
+        조선대학교 인공지능공학전공 2학년 이관오입니다.
+        Vision-Based Robotic Grasping 및 지능형 로봇 제어에 깊은 관심을 갖고 있으며,
+        AI 기술을 실제 물리 세계에 적용하는 연구를 목표로 하고 있습니다.
+      </div>
+    </div>
+
+    <div class="about-item">
+      <div class="about-item-label">Major</div>
+      <div class="about-item-value">인공지능공학전공<br/>Artificial Intelligence Engineering</div>
+    </div>
+
+    <div class="about-item">
+      <div class="about-item-label">Research Interest</div>
+      <div class="about-item-value">Vision-Based Robotic Grasping<br/>Intelligent Manipulation</div>
+    </div>
+
+    <div class="about-item">
+      <div class="about-item-label">Career Goal</div>
+      <div class="about-item-value">AI Robotics Researcher<br/>또는 AI 시스템 엔지니어</div>
+    </div>
+
+    <div class="about-item">
+      <div class="about-item-label">Currently Learning</div>
+      <div class="about-item-value">Computer Vision · Robot Control<br/>Deep Learning · ROS</div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="sec-header">
+    <span class="sec-num">02 /</span>
+    <h2 class="sec-title">Education</h2>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="card edu-card">
+    <div class="edu-header">
+      <div>
+        <div class="edu-school">🏫 조선대학교 (Chosun University)</div>
+        <div class="edu-dept">Department of Artificial Intelligence Engineering</div>
+      </div>
+      <div class="edu-period">2024 — Present</div>
+    </div>
+    <p style="color:var(--muted); font-size:0.9rem; margin-bottom:1rem;">
+      현재 2학년 재학 중 · 3학년 로봇 프로젝트 준비 중
+    </p>
+    <div style="margin-bottom:0.6rem; font-family:var(--mono); font-size:0.7rem; color:var(--muted); letter-spacing:0.1em;">RELEVANT COURSEWORK</div>
+    <div class="course-tags">
+      <span class="tag tag-accent">Machine Learning</span>
+      <span class="tag tag-accent">Deep Learning</span>
+      <span class="tag tag-blue">Computer Vision</span>
+      <span class="tag tag-blue">Data Structures</span>
+      <span class="tag">Algorithm</span>
+      <span class="tag">Linear Algebra</span>
+      <span class="tag">Web Programming</span>
+      <span class="tag">C Programming</span>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="sec-header">
+    <span class="sec-num">03 /</span>
+    <h2 class="sec-title">Skills</h2>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="skills-grid">
+    <!-- Programming -->
+    <div class="card">
+      <div class="skill-group-title">💻 Programming</div>
+
+      <div class="skill-item">
+        <div class="skill-row">
+          <span class="skill-name">Python</span>
+          <span class="skill-level">Intermediate</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill" style="width:60%"></div></div>
+      </div>
+
+      <div class="skill-item">
+        <div class="skill-row">
+          <span class="skill-name">C</span>
+          <span class="skill-level">Intermediate</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill" style="width:55%"></div></div>
+      </div>
+
+      <div class="skill-item">
+        <div class="skill-row">
+          <span class="skill-name">C++</span>
+          <span class="skill-level">Basic</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill" style="width:35%"></div></div>
+      </div>
+    </div>
+
+    <!-- AI / ML -->
+    <div class="card">
+      <div class="skill-group-title">🤖 AI / ML</div>
+
+      <div class="skill-item">
+        <div class="skill-row">
+          <span class="skill-name">Computer Vision</span>
+          <span class="skill-level">Learning</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill" style="width:30%"></div></div>
+      </div>
+
+      <div class="skill-item">
+        <div class="skill-row">
+          <span class="skill-name">PyTorch</span>
+          <span class="skill-level">Basic</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill" style="width:25%"></div></div>
+      </div>
+
+      <div class="skill-item">
+        <div class="skill-row">
+          <span class="skill-name">scikit-learn</span>
+          <span class="skill-level">Basic</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill" style="width:25%"></div></div>
+      </div>
+    </div>
+
+    <!-- Tools -->
+    <div class="card">
+      <div class="skill-group-title">🛠️ Tools & DevOps</div>
+
+      <div class="skill-item">
+        <div class="skill-row">
+          <span class="skill-name">Git / GitHub</span>
+          <span class="skill-level">Basic</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill" style="width:35%"></div></div>
+      </div>
+
+      <div class="skill-item">
+        <div class="skill-row">
+          <span class="skill-name">Docker</span>
+          <span class="skill-level">Basic</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill" style="width:30%"></div></div>
+      </div>
+
+      <div class="skill-item">
+        <div class="skill-row">
+          <span class="skill-name">Linux / Bash</span>
+          <span class="skill-level">Basic</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill" style="width:30%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="sec-header">
+    <span class="sec-num">04 /</span>
+    <h2 class="sec-title">Projects</h2>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="card project-card">
+    <div class="project-status">🔜 Planned — 2026</div>
+    <div class="project-title">Vision-Based Robotic Grasping System</div>
+    <div class="project-summary">
+      카메라 비전을 활용해 로봇 팔이 다양한 물체를 인식하고 정밀하게 파지(Grasping)할 수 있는 지능형 조작 시스템 개발 예정.
+      딥러닝 기반 객체 인식과 로봇 제어를 통합하는 것이 핵심 목표입니다.
+    </div>
+    <div class="project-meta">
+      <div>
+        <div class="meta-item-label">Period</div>
+        <div class="meta-item-value">2026 (3학년 예정)</div>
+      </div>
+      <div>
+        <div class="meta-item-label">Role</div>
+        <div class="meta-item-value">Vision System & Integration</div>
+      </div>
+      <div>
+        <div class="meta-item-label">Tech Stack</div>
+        <div class="meta-item-value">Python · PyTorch · OpenCV · ROS · C++</div>
+      </div>
+      <div>
+        <div class="meta-item-label">Key Features</div>
+        <div class="meta-item-value">Object Detection · Depth Estimation · Robot Control</div>
+      </div>
+    </div>
+    <div style="margin-top:1.5rem;">
+      <a href="https://github.com/gwanoi" class="btn btn-outline" style="font-size:0.75rem; padding:0.5rem 1.2rem;">
+        GitHub (준비 중) →
+      </a>
+    </div>
+  </div>
+
+  <!-- 추가 프로젝트 자리 -->
+  <div class="card" style="border-style: dashed; opacity:0.5; text-align:center; color:var(--muted);">
+    <div style="font-family:var(--mono); font-size:0.8rem;">+ More projects coming soon...</div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="sec-header">
+    <span class="sec-num">05 /</span>
+    <h2 class="sec-title">Experience</h2>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-icon">🎓</div>
+    <div>
+      <div class="exp-title">Chosun University — AI Engineering</div>
+      <div class="exp-sub">2024 — Present · 재학 중 · 인공지능공학전공 2학년</div>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-icon">🤖</div>
+    <div>
+      <div class="exp-title">Robot Project (Planned)</div>
+      <div class="exp-sub">2026 예정 · Vision-Based Robotic Grasping 관련 팀/개인 프로젝트</div>
+    </div>
+  </div>
+
+  <!-- 직접 채워넣기용 빈 칸 -->
+  <div class="exp-item" style="border-style:dashed; opacity:0.5;">
+    <div class="exp-icon">➕</div>
+    <div>
+      <div class="exp-title" style="color:var(--muted);">동아리 / 공모전 / 기타 활동</div>
+      <div class="exp-sub">이 부분을 직접 채워넣으세요</div>
+    </div>
+  </div>
+</section>
+
+<!-- CV / RESUME -->
+<section id="cv">
+  <div class="sec-header">
+    <span class="sec-num">06 /</span>
+    <h2 class="sec-title">CV / Resume</h2>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="cv-block">
+    <div class="cv-icon">📄</div>
+    <div class="cv-text">
+      <h3>이관오 · Lee Gwano</h3>
+      <p>최신 이력서 PDF를 다운로드 하실 수 있습니다.<br/>
+      AI Engineering Student · Chosun University</p>
+      <a href="./resume.pdf" class="btn btn-primary" download>
+        ↓ Download Resume (PDF)
+      </a>
+      <div class="cv-note">⚠ PDF에는 개인정보(주소, 전화번호, 주민번호)가 포함되지 않습니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sec-header">
+    <span class="sec-num">07 /</span>
+    <h2 class="sec-title">Contact</h2>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="contact-grid">
+    <a href="mailto:YOUR_EMAIL@example.com" class="contact-item">
+      <div class="contact-icon">✉️</div>
+      <div>
+        <div class="contact-label">Email</div>
+        <div class="contact-value">YOUR_EMAIL@example.com</div>
+      </div>
+    </a>
+
+    <a href="https://github.com/gwanoi" target="_blank" class="contact-item">
+      <div class="contact-icon">🐙</div>
+      <div>
+        <div class="contact-label">GitHub</div>
+        <div class="contact-value">github.com/gwanoi</div>
+      </div>
+    </a>
+
+    <!-- LinkedIn은 있으면 채워넣기 -->
+    <div class="contact-item" style="opacity:0.4; cursor:default;">
+      <div class="contact-icon">💼</div>
+      <div>
+        <div class="contact-label">LinkedIn</div>
+        <div class="contact-value">Coming soon</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAREER GOAL -->
+<section id="goal">
+  <div class="sec-header">
+    <span class="sec-num">08 /</span>
+    <h2 class="sec-title">Career Goal</h2>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="goal-grid">
+    <div class="goal-card">
+      <div class="goal-icon">🦾</div>
+      <div class="goal-title">AI Robotics Engineer</div>
+      <div class="goal-desc">비전 기반 로봇 시스템 개발</div>
+    </div>
+    <div class="goal-card">
+      <div class="goal-icon">👁️</div>
+      <div class="goal-title">Computer Vision Engineer</div>
+      <div class="goal-desc">영상 인식 및 지능형 제어</div>
+    </div>
+    <div class="goal-card">
+      <div class="goal-icon">🔬</div>
+      <div class="goal-title">AI Researcher</div>
+      <div class="goal-desc">대학원 진학 및 연구자 트랙</div>
+    </div>
+    <div class="goal-card">
+      <div class="goal-icon">🤝</div>
+      <div class="goal-title">Open Source Contributor</div>
+      <div class="goal-desc">AI/Robotics 오픈소스 기여</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Lee Gwano · 이관오 · Chosun University AI Engineering</p>
+  <p style="margin-top:0.5rem;">Built with HTML/CSS · Hosted on GitHub Pages</p>
+</footer>
+
+</body>
+</html>
