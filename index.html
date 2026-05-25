@@ -283,49 +283,61 @@
       padding: 1.5rem 2rem;
     }
 
-    /* ── EDUCATION ── */
-    .edu-card {
-      border-left: 3px solid var(--accent2);
-    }
+   /* ── EDUCATION ── */
+.edu-card {
+  border-left: 3px solid var(--accent2);
+}
 
-    .edu-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 1rem;
-    }
+.edu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
 
-    .edu-school { font-size: 1.2rem; font-weight: 700; }
-    .edu-dept { color: var(--accent2); margin-top: 0.2rem; font-size: 0.95rem; }
-    .edu-period {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--muted);
-      background: var(--surface2);
-      padding: 0.3rem 0.8rem;
-      border-radius: 20px;
-      white-space: nowrap;
-    }
+.edu-school { font-size: 1.2rem; font-weight: 700; }
+.edu-dept { color: var(--accent2); margin-top: 0.2rem; font-size: 0.95rem; }
 
-    .course-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 1rem;
-    }
+/* 여기에 학점(GPA) 스타일이 새로 추가되었습니다! */
+.edu-gpa {
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin-top: 0.4rem;
+}
+.edu-gpa strong {
+  color: var(--accent);
+  font-weight: 600;
+}
 
-    .tag {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      padding: 0.3rem 0.7rem;
-      border-radius: 4px;
-      background: var(--surface2);
-      color: var(--muted);
-      border: 1px solid var(--border);
-    }
+.edu-period {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  background: var(--surface2);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  white-space: nowrap;
+}
 
-    .tag-accent { background: rgba(0,212,170,0.1); color: var(--accent); border-color: rgba(0,212,170,0.3); }
-    .tag-blue { background: rgba(79,142,247,0.1); color: var(--accent2); border-color: rgba(79,142,247,0.3); }
+.course-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  background: var(--surface2);
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+
+.tag-accent { background: rgba(0,212,170,0.1); color: var(--accent); border-color: rgba(0,212,170,0.3); }
+.tag-blue { background: rgba(79,142,247,0.1); color: var(--accent2); border-color: rgba(79,142,247,0.3); }
 
     /* ── SKILLS ── */
     .skills-grid {
@@ -648,12 +660,14 @@
       <div>
         <div class="edu-school">🏫 조선대학교 (Chosun University)</div>
         <div class="edu-dept">Department of Artificial Intelligence Engineering</div>
+        <div class="edu-gpa">Grade Point Average: <strong>3.85</strong> / 4.5</div>
       </div>
-      <div class="edu-period">2024 — Present</div>
+      <div class="edu-period">2025 — Present</div>
     </div>
     <p style="color:var(--muted); font-size:0.9rem; margin-bottom:1rem;">
       현재 2학년 재학 중 · 3학년 로봇 프로젝트 준비 중
     </p>
+    
     <div style="margin-bottom:0.6rem; font-family:var(--mono); font-size:0.7rem; color:var(--muted); letter-spacing:0.1em;">RELEVANT COURSEWORK</div>
     <div class="course-tags">
       <span class="tag tag-accent">Machine Learning</span>
@@ -667,7 +681,6 @@
     </div>
   </div>
 </section>
-
 <!-- SKILLS -->
 <section id="skills">
   <div class="sec-header">
